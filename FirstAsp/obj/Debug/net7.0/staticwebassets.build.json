@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "i8YxWvfX162YXZp8kqzxYcWCMPsqJ02B+zthalr8Yes=",
+  "Hash": "2WPkVDKgg3yBFZbtZDQgKeApbbNJbYTq7L62kAWcMbM=",
   "Source": "FirstAsp",
   "BasePath": "_content/FirstAsp",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "FirstAsp/wwwroot",
+      "Source": "FirstAsp",
+      "ContentRoot": "/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/FirstAsp/wwwroot/",
+      "BasePath": "_content/FirstAsp",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/FirstAsp/wwwroot/css/style.css",
+      "SourceId": "FirstAsp",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/FirstAsp/wwwroot/",
+      "BasePath": "_content/FirstAsp",
+      "RelativePath": "css/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/style.css"
+    }
+  ]
 }

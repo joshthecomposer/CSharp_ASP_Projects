@@ -26,3 +26,4 @@
 /Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/FirstAsp/obj/Debug/net7.0/ref/FirstAsp.dll
 /Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/FirstAsp/obj/Debug/net7.0/FirstAsp.RazorAssemblyInfo.cache
 /Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/FirstAsp/obj/Debug/net7.0/FirstAsp.RazorAssemblyInfo.cs
+/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/FirstAsp/bin/Debug/net7.0/FirstAsp.staticwebassets.runtime.json

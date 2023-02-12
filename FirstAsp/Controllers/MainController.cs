@@ -6,6 +6,7 @@ public class MainController : Controller
     [HttpGet("")]
     public ViewResult Index()
     {
+        ViewBag.Name = "Joshua Wise";
         return View();
     }
 
