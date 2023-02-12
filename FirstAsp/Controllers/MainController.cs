@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace FIRSTASP.Controllers;
-public class MainController
+public class MainController : Controller
 {
     [HttpGet("")]
-    public string Index()
+    public ViewResult Index()
     {
-        return "Hello world from MainController!";
+        return View();
     }
+
     [HttpGet("/user/more")]
     public string More()
     {
