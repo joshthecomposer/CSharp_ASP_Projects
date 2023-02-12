@@ -10,27 +10,35 @@ public class MainController : Controller
         return View();
     }
 
-    [HttpGet("/user/more")]
-    public string More()
+    [HttpGet("user/more")]
+    public RedirectToActionResult More()
     {
-        return "This is user/more page!";
+        return RedirectToAction("Index");
     }
 
-    [HttpGet("/login")]
+    [HttpGet("login")]
     public string Login()
     {
         return "This is login page!";
     }
 
-    [HttpPost("/submission")] //won't work, because I have no way to post.
+    [HttpPost("submission")] //won't work, because I have no way to post.
     public string Submission()
     {
         return "This is submission page!";
     }
 
-    [HttpGet("/greet/{name}/{id}")]
+    [HttpGet("greet/{name}/{id}")]
     public string Greeting(string name, int id)
     {
         return $"Hello {name} at id {id}!";
+    }
+
+    [HttpPost("process")]
+    public IActionResult Process(string Name, int Number)
+    {
+        Console.WriteLine($"Name : {Name}");
+        Console.WriteLine($"Number : {Number}");
+        return RedirectToAction("Index");
     }
 }
