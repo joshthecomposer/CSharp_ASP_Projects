@@ -15,3 +15,15 @@ build_property.SupportLocalizedComponentNames =
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = /Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio
 build_property._RazorSourceGeneratorDebug = 
+
+[/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/Views/Main/contact.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFpbi9jb250YWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/Views/Main/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFpbi9pbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/Views/Main/projects.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFpbi9wcm9qZWN0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

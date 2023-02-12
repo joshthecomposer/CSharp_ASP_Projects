@@ -24,3 +24,6 @@
 /Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/obj/Debug/net7.0/Portfolio.pdb
 /Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/obj/Debug/net7.0/Portfolio.genruntimeconfig.cache
 /Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/obj/Debug/net7.0/ref/Portfolio.dll
+/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/bin/Debug/net7.0/Portfolio.staticwebassets.runtime.json
+/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/obj/Debug/net7.0/Portfolio.RazorAssemblyInfo.cache
+/Users/joshuawise/Documents/coding/coding_dojo/dotnet_Projects/ASPNET/Portfolio/obj/Debug/net7.0/Portfolio.RazorAssemblyInfo.cs
