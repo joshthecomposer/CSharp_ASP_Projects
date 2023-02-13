@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model User
+<div class="container col-4 shadow rounded p-5 my-5">
+    <h1>@Model.Name</h1>
+    <p>@Model.Email</p>
+    <p>@Model.Birthday</p>
+    <p>@Model.FavoriteOddNumber</p>
+    <a class="link-primary" href="/">Back</a>
+</div>
