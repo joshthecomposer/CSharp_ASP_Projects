@@ -22,7 +22,13 @@ public class HomeController : Controller
         [HttpPost("process")]
     public IActionResult Process(User user)
     {
-        return RedirectToAction("result", user);
+        if (ModelState.IsValid){
+            return RedirectToAction("result", user);
+        }
+        else
+        {
+            return View("Index");
+        }
     }
 
     [HttpGet("result")]

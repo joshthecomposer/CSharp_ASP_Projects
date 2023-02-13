@@ -2,35 +2,41 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model User
 <div class="container col-4 rounded shadow p-5 my-5">
         <h1 class="display-6 text-center">Survey</h1>
         <hr>
         <form action="process" method="post">
             <div class="form-group">
-                <label for="Name">Your Name</label>
-                <input class="form-control" type="text" name="Name">
+                <label asp-for="Name"></label>
+                <input class="form-control" type="text" asp-for="Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
             </div>
             <div class="form-group">
-                <label for="Location">Location</label>
-                <select class="form-control" name="Location">
-                    <option class="text-muted" selected>Select Location</option>
+                <label asp-for="Location"></label>
+                <select class="form-control" asp-for="Location">
+                    <option class="text-muted" value="" selected>Select Location</option>
                     <option value="San Jose">San Jose</option>
                     <option value="Chicago">Chicago</option>
                     <option value="LA">LA</option>
                 </select>
+                <span class="text-danger" asp-validation-for="Location"></span>
             </div>
             <div class="form-group">
-                <label for="Language">Language</label>
-                <select class="form-control" name="Language">
-                    <option class="text-muted" selected>Select Language</option>
+                <label asp-for="Language"></label>
+                <select class="form-control" asp-for="Language">
+                    <option class="text-muted" value="" selected>Select Language</option>
                     <option value="C#">C#</option>
                     <option value="Python">Python</option>
                     <option value="JavaScript">JavaScript</option>
                     <option value="Java">Java</option>
                 </select>
+                <span class="text-danger" asp-validation-for="Language"></span>
             </div>
-            <label for="Message">Message</label>
-            <textarea name="Message" rows="10" class="form-control"></textarea>
+            <label asp-for="Message"></label>
+            <textarea asp-for="Message" rows="10" class="form-control"></textarea>
+            <span asp-validation-for="Message"></span>
+            <label for="button"></label>
             <button class="btn btn-secondary my-3 col-12">Submit</button>
         </form>
     </div>
