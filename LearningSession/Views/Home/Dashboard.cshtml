@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1>Welcome, @ViewBag.Name</h1>
+    <div>
+        <a class="btn btn-outline-danger btn-sm" href="/logout">Logout</a>
+    </div>
+</div>
+<hr>
+<p class="display-4 text-center">@Context.Session.GetInt32("Number")</p>
+<div class="row">
+    <div class="col">
+        <a class="text-decoration-none text-black">
+            <form action="/math/0" method="post">
+                <button class="container rounded p-4 m-2 bg-warning toy" type="submit">
+                        <p class="lead text-center no-link">+1</p>
+                </button>
+            </form>
+        </a>
+    </div>
+    <div class="col">
+        <a class="text-decoration-none text-black">
+            <form action="/math/1" method="post">
+                <button class="container rounded p-4 m-2 bg-info toy" type="submit">
+                        <p class="lead text-center no-link">-1</p>
+                </button>
+            </form>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a class="text-decoration-none text-black">
+            <form action="/math/2" method="post">
+                <button class="container rounded p-4 m-2 bg-success toy" type="submit">
+                        <p class="lead text-center no-link">x2</p>
+                </button>
+            </form>
+        </a>
+    </div>
+    <div class="col">
+        <a class="text-decoration-none text-black">
+            <form action="/math/3" method="post">
+                <button class="container rounded p-4 m-2 bg-danger toy" type="submit">
+                        <p class="lead text-center no-link">+Random (1-10)</p>
+                </button>
+            </form>
+        </a>
+    </div>
+</div>
