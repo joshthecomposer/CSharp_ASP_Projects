@@ -24,7 +24,6 @@ public class MainController : Controller
         List<int> numbers = new List<int>{1, 10, 15, 2, 45};
         return View("Numbers", numbers);
     }
-
     [HttpGet("/user")]
     public ViewResult ViewUser()
     {
@@ -43,6 +42,22 @@ public class MainController : Controller
             new User() {FirstName="bill", LastName="swill"}
         };
         return View("ViewUsers", users);
+    }
+
+    [HttpGet("/students/view")]
+    public ViewResult StudentForm()
+    {
+
+        return View();
+    }
+
+    [HttpPost("/student/register")]
+    public IActionResult Register(HogWartsStudent student)
+    {
+        Console.WriteLine(student.Name);
+        Console.WriteLine(student.House);
+        Console.WriteLine(student.CurrentYear);
+        return RedirectToAction("StudentForm", student);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
