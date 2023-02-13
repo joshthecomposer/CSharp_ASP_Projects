@@ -11,13 +11,13 @@ public class User
     public string? Email { get; set; }
     [Required]
     [BirthCheck]
-    public DateTime Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
     [Required]
     [MinLength(8)]
     public string? Password { get; set; }
     [Required]
     [OddCheck]
-    public int FavoriteOddNumber { get; set; }
+    public int? FavoriteOddNumber { get; set; }
 }
 
 public class EmailFormatAttribute : ValidationAttribute
@@ -59,6 +59,10 @@ public class OddCheckAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
     {
+        if (value == null)
+        {
+            return new ValidationResult("This is a required field!");
+        }
         int number = (int)value!;
         if (number < 2)
         {

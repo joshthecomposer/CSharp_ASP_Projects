@@ -6,6 +6,8 @@ namespace FullFormValidation.Controllers;
 
 public class HomeController : Controller
 {
+    static User? user;
+
     private readonly ILogger<HomeController> _logger;
 
     public HomeController(ILogger<HomeController> logger)
@@ -20,11 +22,12 @@ public class HomeController : Controller
     }
 
     [HttpPost("/register")]
-    public IActionResult Register(User user)
+    public IActionResult Register(User newUser)
     {
         if (ModelState.IsValid)
         {
-            return RedirectToAction("Success", user);
+            user = newUser;
+            return RedirectToAction("Success");
         }
         else
         {
@@ -33,7 +36,7 @@ public class HomeController : Controller
     }
 
     [HttpGet("/success")]
-    public ViewResult Success(User user)
+    public ViewResult Success()
     {
         return View(user);
     }
