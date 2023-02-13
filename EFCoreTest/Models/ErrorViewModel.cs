@@ -1,4 +1,4 @@
-namespace LearningSession.Models;
+namespace EFCoreTest.Models;
 
 public class ErrorViewModel
 {
