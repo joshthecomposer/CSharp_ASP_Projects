@@ -13,9 +13,12 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    [HttpGet("")]
+    public ViewResult Index()
     {
-        return View();
+        ViewBag.MyNum = 9;
+        Friend friend = new Friend("Joshua", "Wise", "NYC", 32);
+        return View(friend);
     }
 
     [HttpGet("second")]

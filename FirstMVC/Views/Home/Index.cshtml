@@ -2,9 +2,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container col-6 rounded shadow p-5 my-5">
-    <h1>This is a page</h1>
-    <hr>
-    <p>This is some text.</p>
+@model Friend
+<div class="container col-lg-6 col-sm-10 rounded shadow p-5 my-5">
+    <p>Here is the info from my viewbag @ViewBag.MyNum</p>
+    <p>Here is the info from my model @Model.Age</p>
     <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, quam.</p>
 </div>
