@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "ViewModel Fun";
+}
+
+@model List<int>
+<div class="text-center">
+    <h1 class="display-1">Some Fine Numbers</h1>
+    @foreach(int n in Model)
+    {
+        <p class="lead">@n</p>
+    }
+</div>

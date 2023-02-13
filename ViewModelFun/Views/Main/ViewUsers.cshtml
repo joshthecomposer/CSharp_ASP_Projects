@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "ViewModel Fun";
+}
+
+@model List<User>
+<div class="text-center">
+    <h1 class="display-1">Some Users</h1>
+    @foreach(User u in Model)
+    {
+        <p class="lead">@u.FirstName @u.LastName</p>
+    }
+</div>
