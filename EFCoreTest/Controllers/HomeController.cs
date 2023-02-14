@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#pragma warning disable CS8618
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using EFCoreTest.Models;
 
@@ -42,7 +43,38 @@ public class HomeController : Controller
     [HttpGet("/view/update/{id}")]
     public ViewResult ViewUpdate(int id)
     {
-        return View("ViewUpdate");
+        User user = _context.Users.FirstOrDefault(u => u.UserId == id)!;
+        return View("ViewUpdate", user);
+    }
+
+    [HttpPost("update/{id}")]
+    public IActionResult Update(User user, int Id)
+    {
+        User oldUser = _context.Users.FirstOrDefault(i => i.UserId == Id)!;
+        if (ModelState.IsValid)
+        {
+            oldUser.FirstName = user.FirstName;
+            oldUser.LastName = user.LastName;
+            oldUser.Email = user.Email;
+            oldUser.Password = user.Password;
+            oldUser.UpdatedAt = DateTime.Now;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View("ViewUpdate", oldUser);
+        }
+    }
+
+    [HttpPost("/destroy/{id}")]
+    public IActionResult Delete(int id)
+    {
+        User? user = _context.Users.SingleOrDefault(i => id == i.UserId);
+        _context.Users.Remove(user);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

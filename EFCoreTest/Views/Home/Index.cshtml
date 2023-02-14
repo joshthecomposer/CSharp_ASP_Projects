@@ -39,9 +39,14 @@
                 <p>Name: @u.FirstName @u.LastName</p>
                 <p>Email: @u.Email</p>
             </div>
-            <div class="col d-flex align-items-end">
+            <div class="col d-flex align-items-end gap-2">
                 <div>
-                    <a class="btn btn-outline-danger"href="/view/update/@u.UserId">Edit</a>
+                    <a class="btn btn-outline-primary"href="/view/update/@u.UserId">Edit</a>
+                </div>
+                <div>
+                    <form asp-action="Delete" asp-route-id="@u.UserId" asp-controller="Home" method="POST">
+                        <button type="submit" class="btn btn-outline-danger">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>

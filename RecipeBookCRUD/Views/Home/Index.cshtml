@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col">
+        <div class="container col-sm-12 col-md-10 col-lg-8 shadow rounded mt-5 px-5 pb-5 pt-3">
+            <h2 class="text-center">Dishes</h2>
+            <hr>
+            @foreach(Recipe r in ViewBag.Recipes)
+            {   
+                <div class="d-flex mb-1 justify-content-between align-items-center">
+                    <div class="d-flex gap-3">
+                        <p class="lead align-self-center">@r.Name <span class="text-muted italic">by @r.Chef</span> </p>
+                        <div>
+                            <a class="btn btn-outline-primary btn-sm"  href="/recipes/@r.RecipeId">View</a>
+                        </div>
+                        <div>
+                            <a class="btn btn-outline-primary btn-sm"  href="/recipes/@r.RecipeId/edit">Edit</a>
+                        </div>
+                        <form asp-action="Destroy" asp-controller="Home" asp-route-Id="@r.RecipeId" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                    <p class="text-muted">Created on @r.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

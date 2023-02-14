@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Edit Recipe";
+}
+
+@model Recipe
+<div class="container col-sm-12 col-md-8 col-lg-4 shadow rounded mt-5 px-5 pb-5 pt-3">
+    <h1 class="text-center">@Model.Name</h1>
+    <p class="text-center text-muted">by @Model.Chef</p>
+    <hr>
+    <p>This is a @Model.Tastiness rating recipe.</p>
+    <p class="lead">Description:</p>
+    <p>@Model.Description</p>
+    <p>Calories: @Model.Calories</p>
+
+    <p class="text-muted italic">Last updated on @Model.UpdatedAt.ToString("MMMM dd, yyyy")</p>
+</div>

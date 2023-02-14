@@ -6,7 +6,7 @@
 <div class="container col-6 shadow rounded p-5 my-5">
     <h2 class="display-4 text-center">Form</h2>
     <hr>
-    <form id="indexForm" action="/update" method="post">
+    <form id="indexForm" action="/update/@Model.UserId" method="post">
         <div class="form-group">
             <label asp-for="FirstName" ></label>
             <span class="text-danger" asp-validation-for="FirstName"></span>
@@ -29,14 +29,4 @@
         </div>
         <button class="btn btn-outline-primary col-12 mt-3">Submit</button>
     </form>
-</div>
-
-<div class="container col-6 shadow rounded p-5 my-5">
-    @foreach (User u in ViewBag.AllUsers)
-    {
-        <p>ID: @u.UserId</p>
-        <p>Name: @u.FirstName @u.LastName</p>
-        <p>Email: @u.Email</p>
-        <hr>
-    }
 </div>
