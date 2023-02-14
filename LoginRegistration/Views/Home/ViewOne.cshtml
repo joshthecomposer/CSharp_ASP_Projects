@@ -1,0 +1,11 @@
+@{
+    ViewData["Title"] = "View User";
+}
+
+@model User
+<div class="container col-5 rounded shadow p-5 my-5">
+    <h1>@Model.FirstName @Model.LastName</h1>
+    <p>@Model.Email</p>
+    <p>@Model.CreatedAt.ToString("MMMM dd, yyyy")</p>
+    <a class="link-primary" href="/logout">Logout</a>
+</div>
