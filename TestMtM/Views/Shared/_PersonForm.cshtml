@@ -1,0 +1,12 @@
+@model Person
+<div class="container col-5 rounded shadow p-5 mt-3">
+    <h1>Add Person</h1>
+    <form asp-action="Create" asp-controller="Person" method="post">
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <span asp-validation-for="Name"></span>
+            <input class="form-control" asp-for="Name" type="text">
+        </div>
+        <button class="btn btn-outline-primary col-12 mt-4">Submit</button>
+    </form>
+</div>

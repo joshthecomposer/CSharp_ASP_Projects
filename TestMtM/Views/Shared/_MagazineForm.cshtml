@@ -1,0 +1,12 @@
+@model Magazine
+<div class="container col-5 rounded shadow p-5 mt-3">
+    <h1>Add Magazine</h1>
+    <form asp-action="Create" asp-controller="Magazine" method="post">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <span asp-validation-for="Title"></span>
+            <input class="form-control" asp-for="Title" type="text">
+        </div>
+        <button class="btn btn-outline-primary col-12 mt-4">Submit</button>
+    </form>
+</div>

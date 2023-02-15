@@ -1,0 +1,29 @@
+@model Subscription
+<div class="container col-5 rounded shadow p-5 mt-3">
+    <h1>Add Subscription</h1>
+    <form asp-action="CreateSub" asp-controller="Magazine" method="post">
+        <div class="form-group">
+            <label asp-for="PersonId">Person</label>
+            <span asp-validation-for="PersonId"></span>
+            <select class="form-control" asp-for="PersonId" type="text">
+                <option value="" selected>Select a person</option>
+                @foreach(Person p in ViewBag.People)
+                {
+                    <option value="@p.PersonId">@p.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="MagazineId">Magazine</label>
+            <span asp-validation-for="MagazineId"></span>
+            <select class="form-control" asp-for="MagazineId" type="text">
+                <option value="" selected>Select a magazine</option>
+                @foreach(Magazine p in ViewBag.Magazines)
+                {
+                    <option value="@p.MagazineId">@p.Title</option>
+                }
+            </select>
+        </div>
+        <button class="btn btn-outline-primary col-12 mt-4">Submit</button>
+    </form>
+</div>

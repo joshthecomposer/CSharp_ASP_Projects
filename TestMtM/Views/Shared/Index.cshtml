@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model MainModel
+<div class="container d-flex">
+    @await Html.PartialAsync("_PersonForm")
+    @await Html.PartialAsync("_MagazineForm")
+</div>
+<div class="container d-flex">
+    @await Html.PartialAsync("_Subscription")
+
+    <div class="container col-5 rounded shadow p-5 mt-3">
+        @foreach(Person p in ViewBag.Peeps)
+        {
+            <h1>@p.Name</h1>
+            foreach(Subscription s in p.Subscriptions)
+            {
+                <p>@s.Magazine?.Title</p>
+            }
+        }
+    </div>
+</div>
