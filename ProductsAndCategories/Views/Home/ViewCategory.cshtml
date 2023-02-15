@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Association
+<div class="container col-5 p-5 mt-3">
+    <h1>@ViewBag.Category.Name Products</h1>
+    @foreach(Association p in ViewBag.Category.Products)
+    {
+    <a href="/products/@p.ProductId"><p>@p.Product?.Name</p></a> 
+    }
+</div>
+<div class="container col-5 rounded shadow p-5 mt-3">
+    <h1>Add Product</h1>
+    <form asp-action="AssociationCreate" asp-controller="Home" method="post">
+        <div class="form-group">
+            <input asp-for="CategoryId" value="@ViewBag.Category.CategoryId" type="hidden">
+            <label asp-for="ProductId">Product</label>
+            <span class="text-danger" asp-validation-for="ProductId"></span>
+            <select class="form-control" asp-for="ProductId">
+                <option value="">Select a Product</option>
+                @foreach(Product p in ViewBag.Products)
+                {
+                    <option value="@p.ProductId">@p.Name</option>
+                }
+            </select>
+        </div>
+        <button class="btn btn-outline-primary col-12 mt-4">Submit</button>
+    </form>
+</div>
