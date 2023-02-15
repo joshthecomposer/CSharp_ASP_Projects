@@ -11,8 +11,8 @@ using RecipeBookCRUD.Models;
 namespace LearningSession.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230214044852_ThisMigration")]
-    partial class ThisMigration
+    [Migration("20230215002215_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,34 @@ namespace LearningSession.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("RecipeBookCRUD.Models.Chef", b =>
+                {
+                    b.Property<int>("ChefId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("ChefId");
+
+                    b.ToTable("Chefs");
+                });
 
             modelBuilder.Entity("RecipeBookCRUD.Models.Recipe", b =>
                 {
@@ -33,6 +61,9 @@ namespace LearningSession.Migrations
                     b.Property<string>("Chef")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("ChefId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -53,7 +84,20 @@ namespace LearningSession.Migrations
 
                     b.HasKey("RecipeId");
 
+                    b.HasIndex("ChefId");
+
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("RecipeBookCRUD.Models.Recipe", b =>
+                {
+                    b.HasOne("RecipeBookCRUD.Models.Chef", "Creator")
+                        .WithMany()
+                        .HasForeignKey("ChefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Creator");
                 });
 #pragma warning restore 612, 618
         }

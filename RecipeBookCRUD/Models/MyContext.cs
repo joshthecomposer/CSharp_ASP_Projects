@@ -5,4 +5,5 @@ public class MyContext : DbContext
 {   
     public MyContext(DbContextOptions options) : base(options) { }      
     public DbSet<Recipe> Recipes { get; set; }
+    public DbSet<Chef> Chefs {get;set;}
 }

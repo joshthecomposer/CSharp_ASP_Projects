@@ -9,8 +9,6 @@ public class Recipe
     [Required]
     public string Name { get; set; }
     [Required]
-    public string Chef { get; set; }
-    [Required]
     [Range(1, 5)]
     public int Tastiness { get; set; }
     public int Calories { get; set; }
@@ -18,6 +16,11 @@ public class Recipe
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+    public int ChefId {get;set;}
+
+
+    public Chef? Creator {get;set;}
 }
 
 //Custom annotation template

@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using RecipeBookCRUD.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace RecipeBookCRUD.Controllers;
 
@@ -18,14 +19,19 @@ public class HomeController : Controller
     [HttpGet("")]
     public ViewResult Index()
     {
-        List<Recipe> allRecipes = _context.Recipes.Where(r => r.RecipeId > 0).ToList();
-        ViewBag.Recipes = allRecipes;
+        ViewBag.Recipes = _context.Recipes.Include(r=>r.Creator).ToList();
+        ViewBag.Chefs = _context.Chefs.ToList();
         return View();
     }
 
     [HttpGet("/recipes/new")]
     public ViewResult New()
     {
+        ViewBag.Chefs = _context.Chefs.Where(c=>c.ChefId > 0).ToList();
+        foreach(Chef chef in ViewBag.Chefs)
+        {
+            Console.WriteLine(chef.FirstName);
+        }
         return View();
     }
 
@@ -39,7 +45,8 @@ public class HomeController : Controller
     [HttpGet("/recipes/{id}/edit")]
     public ViewResult Edit(int id)
     {
-        Recipe? r = _context.Recipes.FirstOrDefault(r => r.RecipeId == id);
+        ViewBag.Chefs = _context.Chefs.Where(c=>c.ChefId > 0).ToList();
+        Recipe? r = _context.Recipes.Include(r=>r.Creator).FirstOrDefault(r => r.RecipeId == id);
         return View(r);
     }
 
@@ -50,7 +57,6 @@ public class HomeController : Controller
         if (ModelState.IsValid)
         {
             oldR!.Name = newR.Name;
-            oldR.Chef = newR.Chef;
             oldR.Tastiness = newR.Tastiness;
             oldR.Calories = newR.Calories;
             oldR.Description = newR.Description;
@@ -76,22 +82,54 @@ public class HomeController : Controller
     [HttpPost("/recipes/create")]
     public IActionResult Create(Recipe newRecipe)
     {
+        Console.WriteLine("============================\nMade it into Create Action\n================================");
+        Console.WriteLine("Foreign Key: "+newRecipe.Name);
+        Console.WriteLine("Foreign Key: "+newRecipe.ChefId);
+        Console.WriteLine("Creator: "+newRecipe.Creator);
         if (ModelState.IsValid)
         {
+            Console.WriteLine("============================\nMade it past Validation\n================================");
+
             _context.Add(newRecipe);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
         else
         {
-            Console.WriteLine(newRecipe.Name);
-            Console.WriteLine(newRecipe.Chef);
-            Console.WriteLine(newRecipe.Calories);
-            Console.WriteLine(newRecipe.Description);
-            Console.WriteLine(newRecipe.Tastiness);
-            Console.WriteLine("Couldn't create recipe");
+            Console.WriteLine("============================\nValidation Failure\n================================");
             return View("New", newRecipe);
         }
+    }
+
+    [HttpGet("/chefs/new")]
+    public ViewResult NewChef()
+    {
+        return View();
+    }
+
+    [HttpPost("/chefs/create")]
+    public IActionResult CreateChef(Chef newChef)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Add(newChef);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View("NewChef", newChef);
+
+        }
+    }
+
+    [HttpPost("/chefs/{Id}/destroy")]
+    public IActionResult ChefDestroy(int Id)
+    {
+        Chef? c = _context.Chefs.SingleOrDefault(e=>e.ChefId == Id);
+        _context.Remove(c!);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

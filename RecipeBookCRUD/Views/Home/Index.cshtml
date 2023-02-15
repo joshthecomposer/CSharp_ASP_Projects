@@ -11,7 +11,8 @@
             {   
                 <div class="d-flex mb-1 justify-content-between align-items-center">
                     <div class="d-flex gap-3">
-                        <p class="lead align-self-center">@r.Name <span class="text-muted italic">by @r.Chef</span> </p>
+                        @* Todo: Add the chef's name *@
+                        <p class="lead align-self-center">@r.Name <span class="text-muted italic">by @r.Creator.FirstName @r.Creator.LastName</span> </p>
                         <div>
                             <a class="btn btn-outline-primary btn-sm"  href="/recipes/@r.RecipeId">View</a>
                         </div>
@@ -23,6 +24,21 @@
                         </form>
                     </div>
                     <p class="text-muted">Created on @r.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                </div>
+            }
+        </div>
+        <div class="container col-sm-12 col-md-10 col-lg-8 shadow rounded mt-5 px-5 pb-5 pt-3">
+            <h2 class="text-center">Chefs</h2>
+            <hr>
+            @foreach(Chef r in ViewBag.Chefs)
+            {   
+                <div class="d-flex mb-1 justify-content-between align-items-center">
+                    <div class="d-flex gap-3">
+                        <p class="lead align-self-center">@r.FirstName @r.LastName</p>
+                        <form asp-action="ChefDestroy" asp-controller="Home" asp-route-Id="@r.ChefId" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
                 </div>
             }
         </div>

@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "New Recipe";
+}
+
+@model Chef
+<div class="container shadow rounded mt-5 px-5 pb-5 pt-3">
+    <h2 class="text-center">New Chef</h2>
+    <hr>
+    <form action="/chefs/create" method="post">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                    <input asp-for="FirstName" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName"></label>
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                    <input asp-for="LastName" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Birthday"></label>
+                    <span class="text-danger" asp-validation-for="Birthday"></span>
+                    <input type="date" asp-for="Birthday" class="form-control">
+                </div>
+            </div>
+        <button type="submit" class="btn btn-primary col-12 mt-5">Add Chef</button>
+    </form>
+</div>
