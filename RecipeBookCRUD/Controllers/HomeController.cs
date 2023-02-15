@@ -38,7 +38,7 @@ public class HomeController : Controller
     [HttpGet("/recipes/{id}")]
     public ViewResult ViewOne(int id)
     {
-        Recipe? r = _context.Recipes.FirstOrDefault(r => r.RecipeId == id);
+        Recipe? r = _context.Recipes.Include(r=>r.Creator).FirstOrDefault(r => r.RecipeId == id);
         return View(r);
     }
 

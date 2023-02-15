@@ -25,3 +25,7 @@ body {
   font-size: 12px;
   font-style: italic;
 }
+
+.italic-big {
+  font-style: italic;
+}
