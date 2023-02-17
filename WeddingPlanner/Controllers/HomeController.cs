@@ -94,7 +94,6 @@ public class HomeController : Controller
     [HttpGet("/weddings/new")]
     public IActionResult WeddingForm()
     {
-
         User? u = _context.Users.FirstOrDefault(u=>u.UserId == HttpContext.Session.GetInt32("User"))!;
         if (u == null)
         {

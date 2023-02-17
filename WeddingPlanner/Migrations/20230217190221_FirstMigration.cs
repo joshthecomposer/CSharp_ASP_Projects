@@ -6,48 +6,43 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeddingPlanner.Migrations
 {
-    public partial class SecondMigration : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.UpdateData(
-                table: "Users",
-                keyColumn: "Email",
-                keyValue: null,
-                column: "Email",
-                value: "");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Email",
-                table: "Users",
-                type: "longtext",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "longtext",
-                oldNullable: true)
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .OldAnnotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "CreatedAt",
-                table: "Users",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
-            migrationBuilder.AddColumn<DateTime>(
-                name: "UpdatedAt",
-                table: "Users",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Wedding",
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Password = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Weddings",
                 columns: table => new
                 {
                     WeddingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     NameOne = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NameTwo = table.Column<string>(type: "longtext", nullable: false)
@@ -60,12 +55,18 @@ namespace WeddingPlanner.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Wedding", x => x.WeddingId);
+                    table.PrimaryKey("PK_Weddings", x => x.WeddingId);
+                    table.ForeignKey(
+                        name: "FK_Weddings_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "RSVPList",
+                name: "RSVPLists",
                 columns: table => new
                 {
                     RSVPListId = table.Column<int>(type: "int", nullable: false)
@@ -75,58 +76,48 @@ namespace WeddingPlanner.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RSVPList", x => x.RSVPListId);
+                    table.PrimaryKey("PK_RSVPLists", x => x.RSVPListId);
                     table.ForeignKey(
-                        name: "FK_RSVPList_Users_UserId",
+                        name: "FK_RSVPLists_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RSVPList_Wedding_WeddingId",
+                        name: "FK_RSVPLists_Weddings_WeddingId",
                         column: x => x.WeddingId,
-                        principalTable: "Wedding",
+                        principalTable: "Weddings",
                         principalColumn: "WeddingId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RSVPList_UserId",
-                table: "RSVPList",
+                name: "IX_RSVPLists_UserId",
+                table: "RSVPLists",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RSVPList_WeddingId",
-                table: "RSVPList",
+                name: "IX_RSVPLists_WeddingId",
+                table: "RSVPLists",
                 column: "WeddingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Weddings_UserId",
+                table: "Weddings",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RSVPList");
+                name: "RSVPLists");
 
             migrationBuilder.DropTable(
-                name: "Wedding");
+                name: "Weddings");
 
-            migrationBuilder.DropColumn(
-                name: "CreatedAt",
-                table: "Users");
-
-            migrationBuilder.DropColumn(
-                name: "UpdatedAt",
-                table: "Users");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Email",
-                table: "Users",
-                type: "longtext",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "longtext")
-                .Annotation("MySql:CharSet", "utf8mb4")
-                .OldAnnotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
