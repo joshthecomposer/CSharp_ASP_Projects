@@ -56,12 +56,6 @@ namespace WeddingPlanner.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Weddings", x => x.WeddingId);
-                    table.ForeignKey(
-                        name: "FK_Weddings_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -101,11 +95,6 @@ namespace WeddingPlanner.Migrations
                 name: "IX_RSVPLists_WeddingId",
                 table: "RSVPLists",
                 column: "WeddingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Weddings_UserId",
-                table: "Weddings",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -114,10 +103,10 @@ namespace WeddingPlanner.Migrations
                 name: "RSVPLists");
 
             migrationBuilder.DropTable(
-                name: "Weddings");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Weddings");
         }
     }
 }

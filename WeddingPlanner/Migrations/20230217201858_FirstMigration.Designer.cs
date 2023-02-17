@@ -11,7 +11,7 @@ using WeddingPlanner.Models;
 namespace WeddingPlanner.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230217190221_FirstMigration")]
+    [Migration("20230217201858_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,8 +107,6 @@ namespace WeddingPlanner.Migrations
 
                     b.HasKey("WeddingId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Weddings");
                 });
 
@@ -129,17 +127,6 @@ namespace WeddingPlanner.Migrations
                     b.Navigation("User");
 
                     b.Navigation("Wedding");
-                });
-
-            modelBuilder.Entity("WeddingPlanner.Models.Wedding", b =>
-                {
-                    b.HasOne("WeddingPlanner.Models.User", "Creator")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("WeddingPlanner.Models.User", b =>

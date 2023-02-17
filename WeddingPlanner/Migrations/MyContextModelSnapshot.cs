@@ -105,8 +105,6 @@ namespace WeddingPlanner.Migrations
 
                     b.HasKey("WeddingId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Weddings");
                 });
 
@@ -127,17 +125,6 @@ namespace WeddingPlanner.Migrations
                     b.Navigation("User");
 
                     b.Navigation("Wedding");
-                });
-
-            modelBuilder.Entity("WeddingPlanner.Models.Wedding", b =>
-                {
-                    b.HasOne("WeddingPlanner.Models.User", "Creator")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("WeddingPlanner.Models.User", b =>

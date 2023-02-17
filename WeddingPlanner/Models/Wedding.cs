@@ -1,11 +1,14 @@
 #pragma warning disable CS8618
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace WeddingPlanner.Models;
 public class Wedding
 {   
     [Key]
     public int WeddingId {get;set;}
+    [Required]
     public int UserId {get;set;}
     [Required]
     public string NameOne {get;set;}
@@ -20,5 +23,7 @@ public class Wedding
     public DateTime UpdatedAt {get;set;} = new DateTime();
 
     public List<RSVPList> Guests {get;set;} = new List<RSVPList>();
-    public User Creator {get;set;}
+
+    // [NotMapped]
+    // public User Creator {get;set;}
 }

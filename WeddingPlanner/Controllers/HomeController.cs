@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WeddingPlanner.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace WeddingPlanner.Controllers;
 
@@ -47,24 +48,24 @@ public class HomeController : Controller
         ViewModel v = new ViewModel {User = new User(), LoginUser = l};
         if (ModelState.IsValid)
         {
-           User? check = _context.Users.SingleOrDefault(u=>u.Email == l.Email);
-           if ( check == null)
-           {
+            User? check = _context.Users.SingleOrDefault(u => u.Email == l.Email);
+            if (check == null)
+            {
                 ModelState.AddModelError("Email", "Email or Password Invalid");
                 return View("Index", v);
-           }
-           PasswordHasher<LoginUser> hasher = new PasswordHasher<LoginUser>();
-           var result = hasher.VerifyHashedPassword(l, check.Password!, l.Password);
-           if (result == 0)
-           {    
+            }
+            PasswordHasher<LoginUser> hasher = new PasswordHasher<LoginUser>();
+            var result = hasher.VerifyHashedPassword(l, check.Password!, l.Password);
+            if (result == 0)
+            {
                 ModelState.AddModelError("Password", "Email or Password Invalid");
                 return View("Index", v);
-           }
-           else
-           {
+            }
+            else
+            {
                 HttpContext.Session.SetInt32("User", check.UserId);
-                return Redirect("/users/"+check.UserId+"/dashboard");
-           }
+                return Redirect("/users/" + check.UserId + "/dashboard");
+            }
         }
         else
         {
@@ -77,9 +78,10 @@ public class HomeController : Controller
     public IActionResult Dashboard(int UserId)
     {
         if (HttpContext.Session.GetInt32("User") == UserId)
-        {
-            User u = _context.Users.FirstOrDefault(u=>u.UserId == UserId)!;
-            return View(u);
+        {   
+            ViewBag.User = _context.Users.FirstOrDefault(u=>u.UserId == UserId)!;
+            ViewBag.Weddings = _context.Weddings.ToList();
+            return View(new Wedding());
         }
         return RedirectToAction("Index");
     }
@@ -99,6 +101,7 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
+        ViewBag.UserId = u.UserId;
         return View();
     }
     [HttpPost("/weddings/create")]
@@ -110,7 +113,34 @@ public class HomeController : Controller
             _context.SaveChanges();
             return Redirect("/");
         }
-        return View("WeddingForm", w);
+        else
+        {
+            string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+            Console.WriteLine(messages);
+            return View("WeddingForm", w);
+
+        }
+    }
+    [HttpPost]
+    public IActionResult DeleteWedding(Wedding w)
+    {
+        _context.Remove(w);
+        _context.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    [HttpGet("/users/{UserId}/rsvp/{WeddingId}")]
+    public IActionResult RSVPToWedding(int userId, int weddingId)
+    {
+        RSVPList? check = _context.RSVPLists.FirstOrDefault(r => r.UserId == userId && r.WeddingId == weddingId);
+        if (check == null)
+        {
+            RSVPList newRSVP = new RSVPList{UserId = userId, WeddingId = weddingId};
+            _context.RSVPLists.Add(newRSVP);
+            _context.SaveChanges();
+        }
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
